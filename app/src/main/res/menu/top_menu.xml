@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/action_album"
+            android:title="Album" />
+
+        <item
+            android:id="@+id/action_all_image"
+            android:title="All Image" />
+        <item
+            android:id="@+id/action_mode"
+            android:title="Dark Mode" />
+        <item
+            android:id="@+id/action_night"
+            android:title="Night Mode" />
+
+
+    </group>
+
+
+</menu>

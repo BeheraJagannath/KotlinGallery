@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/similar_image"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:contentDescription="Filter"
+        android:padding="5dp"
+        android:src="@drawable/ic_photo_filter"
+        app:tint="@color/black" />
+
+    <ImageView
+        android:id="@+id/crop"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:src="@drawable/ic_crop_rotate"
+       />
+
+    <ImageView
+        android:id="@+id/draw"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:tint="@color/black"
+        android:src="@drawable/ic_image_editor"
+        />
+
+</LinearLayout>

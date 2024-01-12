@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Kotlin Gallerypro</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+    <string name="no_of_photos">Number Of Photos</string>
+    <string name="last_modified_date">Last modify Date</string>
+    <string name="name">Name</string>
+    <string name="size_in_b">%1$.2f B</string>
+    <string name="size_in_kb">%1$.2f KB</string>
+    <string name="size_in_mb">%1$.2f MB</string>
+    <string name="size_in_gb">%1$.2f GB</string>
+
+</resources>

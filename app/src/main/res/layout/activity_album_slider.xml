@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".Activity.AlbumSliderActivity">
+    <LinearLayout
+        android:id="@+id/video_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="7dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/bbk"
+            app:tint="@color/black"
+            android:layout_marginStart="8dp" />
+
+        <TextView
+            android:id="@+id/image_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:lines="1"
+            android:text="Lorem ipsum dolor sit amet....."
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/image_like"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="6dp"
+            android:src="@drawable/ic_like_24"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/image_info"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="6dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_info"
+            />
+
+
+    </LinearLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/albumViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/video_bottom_option"
+        android:layout_below="@+id/video_toolbar"
+        android:layout_weight="1"
+        android:background="@color/white" />
+
+
+    <LinearLayout
+        android:id="@+id/video_bottom_option"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:clickable="false">
+
+        <ImageView
+            android:id="@+id/image_fav"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@drawable/ic_like_24"
+            app:tint="@color/black"/>
+        <ImageView
+            android:id="@+id/image_edit"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@drawable/ic_edit"
+            app:tint="@color/black"/>
+
+        <ImageView
+            android:id="@+id/image_share"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@drawable/ic_share"
+            app:tint="@color/black"/>
+
+        <ImageView
+            android:id="@+id/image_delete"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/black"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".Activity.VideoSliderActivity">
+    <LinearLayout
+        android:id="@+id/video_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/backImageView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="7dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/bbk"
+            app:tint="@color/black"
+            android:layout_marginStart="8dp" />
+
+        <TextView
+            android:id="@+id/video_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:lines="1"
+            android:text="Lorem ipsum dolor sit amet....."
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/video_like"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="6dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="6dp"
+            android:src="@drawable/ic_like_24"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/video_info"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="6dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_info"
+            />
+
+
+    </LinearLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/video_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/video_bottom_option"
+        android:layout_below="@+id/video_toolbar"
+        android:layout_weight="1"
+        android:background="@color/background" />
+
+
+    <LinearLayout
+        android:id="@+id/video_bottom_option"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:clickable="false">
+
+        <ImageView
+            android:id="@+id/video_fav"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@drawable/ic_like_24"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/video_share"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@drawable/ic_share"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/video_delete"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/black" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+</layout>

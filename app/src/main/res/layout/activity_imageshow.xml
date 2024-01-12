@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".Activity.AlbumshowActivity">
+
+    <LinearLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/tab_background"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/iv_bk"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/bbk"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/xTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vidaloka"
+                android:text="Images"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+
+            <ImageView
+                android:id="@+id/menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-25dp"
+                android:paddingVertical="19dp"
+                android:src="@drawable/a_settings"
+                app:tint="@color/icon"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/multiple"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/tab_background"
+        android:visibility="gone"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/m_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/bbk"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/m_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vidaloka"
+                android:text="Images"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+
+            <ImageView
+                android:id="@+id/m_share"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingVertical="7dp"
+                android:layout_marginHorizontal="10sp"
+                android:src="@drawable/ic_share"
+
+
+
+                android:visibility="visible"/>
+            <ImageView
+                android:id="@+id/m_delete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingVertical="7dp"
+                android:layout_marginHorizontal="10sp"
+                android:src="@drawable/ic_delete"
+                android:visibility="visible"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imageshow_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="5dp"/>
+
+
+
+</LinearLayout>
+</layout>

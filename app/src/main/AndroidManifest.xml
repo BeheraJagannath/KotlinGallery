@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.kotlingallerypro">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+<!--    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>-->
+<!--    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>-->
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Design.NoActionBar"
+        tools:targetApi="31">
+        <activity
+            android:name=".Activity.CustomTabActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.VideoPlayerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AllimageSliderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AlbumSliderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.VideoSliderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.VideoshowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AllimageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AlbumshowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+            <meta-data
+                android:name="preloaded_fonts"
+                android:resource="@array/preloaded_fonts" />
+        </provider>
+    </application>
+
+</manifest>
