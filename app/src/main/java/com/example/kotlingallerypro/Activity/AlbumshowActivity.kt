@@ -88,7 +88,7 @@ class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
         imageshowbinding.imageshowRecycler.layoutManager = GridLayoutManager(this, Utils.COLUMN_TYPE)
         adapter = AlbumshowAdapter(allPictures, this,this)
 
-        imageshowbinding.imageshowRecycler.adapter = adapter
+        imageshowbinding.imageshowRecycler.setAdapter(adapter)
         adapter.notifyDataSetChanged()
     }
 
