@@ -45,8 +45,6 @@ class AllimageSliderActivity : AppCompatActivity() {
         var preferenceManager: PreferenceManager? = null
         lateinit var dHelper: DbHelper
 
-
-
         private var position = 0
 
         lateinit var  imagesPager : ImagesPager
@@ -56,13 +54,10 @@ class AllimageSliderActivity : AppCompatActivity() {
 
     }
 
-
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         imageSliderBinding=DataBindingUtil. setContentView(this ,R.layout.activity_allimage_slider)
-
-
 
         val imageSliderMode: ImageSliderModel? = intent.getSerializableExtra("key") as ImageSliderModel?
 
@@ -73,25 +68,20 @@ class AllimageSliderActivity : AppCompatActivity() {
             finish()
         }
 
-
-
-
         slider()
         dHelper = DbHelper(this,null)
 
-
     }
-
     private fun slider() {
         imagesPager = ImagesPager()
-        imageSliderBinding . imageViewPager.setAdapter(imagesPager)
+        imageSliderBinding . imageViewPager.adapter = imagesPager
         imageSliderBinding.imageViewPager.setPageTransformer(true, DrawerTransformer() as ViewPager.PageTransformer?)
-        imageSliderBinding.imageViewPager.setCurrentItem(position)
+        imageSliderBinding.imageViewPager.currentItem = position
         imageSliderBinding.imageViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             @SuppressLint("NewApi")
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                if (position < imagesPager.getCount() - 1 && position < allImage.size - 1) {
-                    imageSliderBinding.imageTitle.setText(allImage[position].name)
+                if (position < imagesPager.count - 1 && position < allImage.size - 1) {
+                    imageSliderBinding.imageTitle.text = allImage[position].name
 
                     if (dHelper.getStatuss(java.lang.String.valueOf(allImage[position].id))) {
                         imageSliderBinding.imageLike.setImageResource(R.drawable.ic_liked)
@@ -108,7 +98,6 @@ class AllimageSliderActivity : AppCompatActivity() {
                         likeimage(position)
 
                     }
-
 
                     imageSliderBinding.imageDelete.setOnClickListener {
                         val file = File(allImage[position].path)
@@ -194,8 +183,8 @@ class AllimageSliderActivity : AppCompatActivity() {
         val tvDateTaken = view.findViewById<TextView>(R.id.tv_date_taken)
         val tvDateModified = view.findViewById<TextView>(R.id.tv_date_modified)
 
-        tvImageSize.setText(humanReadableByteCountSI(
-            allImagesModel.pictureSize.toLong()))
+        tvImageSize.text = humanReadableByteCountSI(
+            allImagesModel.pictureSize.toLong())
         tvImagePath.text = allImagesModel.path
         tvImageName.text = allImagesModel.name
         tvImageResolution.text = allImagesModel.imageHeightWidth
@@ -217,7 +206,6 @@ class AllimageSliderActivity : AppCompatActivity() {
 
 
     }
-
     @SuppressLint("NewApi")
     private fun likeimage(position: Int) {
         if (dHelper .getStatuss(java.lang.String.valueOf ( allImage[position].id  ))) {
@@ -232,8 +220,6 @@ class AllimageSliderActivity : AppCompatActivity() {
 
     }
 
-
-
     private fun shareImage(position: Int) {
         val path: String
         val uri: Uri
@@ -246,7 +232,6 @@ class AllimageSliderActivity : AppCompatActivity() {
         } else {
             Uri.fromFile(file)
         }
-
 
         val intent = Intent(Intent.ACTION_SEND)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -280,7 +265,6 @@ class AllimageSliderActivity : AppCompatActivity() {
 
         dialog.show()
 
-
     }
 
     private fun deletePhoto(file: File, i: Int) {
@@ -305,7 +289,6 @@ class AllimageSliderActivity : AppCompatActivity() {
         }
 
     }
-
 
     class ImagesPager : PagerAdapter() {
         override fun getCount(): Int {
@@ -366,7 +349,4 @@ class AllimageSliderActivity : AppCompatActivity() {
             SimpleDateFormat("dd.MM.yyyy , HH:mm:aa")
         return format.format(date)
     }
-
-
-
 }

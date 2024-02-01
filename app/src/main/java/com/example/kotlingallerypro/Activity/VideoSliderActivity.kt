@@ -36,7 +36,7 @@ import java.text.CharacterIterator
 import java.text.Format
 import java.text.SimpleDateFormat
 import java.text.StringCharacterIterator
-import java.util.*
+import java.util.Date
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -49,13 +49,12 @@ import kotlin.arrayOf
 class VideoSliderActivity : AppCompatActivity() {
     companion object{
         lateinit var videoSliderBinding: ActivityVideoSliderBinding
-        var allVideoList = java.util.ArrayList<Videomodel>()
+        var allVideoList = ArrayList<Videomodel>()
         var position = -1
         private var Helper: DbHelper? = null
         lateinit var videoPager: VideoPager
 
         lateinit var imageView:ImageView
-
 
     }
     var mAdCount = 0
@@ -69,7 +68,6 @@ class VideoSliderActivity : AppCompatActivity() {
     fun getImageID(): String {
         return imageID
     }
-
 
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,18 +86,16 @@ class VideoSliderActivity : AppCompatActivity() {
 
         videoslider()
 
-
     }
-
     private fun videoslider() {
         videoPager = VideoPager()
-        videoSliderBinding.videoViewpager.setAdapter( videoPager)
+        videoSliderBinding.videoViewpager.adapter =  videoPager
         videoSliderBinding.videoViewpager.setPageTransformer(true, DrawerTransformer() as ViewPager.PageTransformer?)
-        videoSliderBinding.videoViewpager.setCurrentItem( position )
+        videoSliderBinding.videoViewpager.currentItem =  position
         videoSliderBinding.videoViewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             @SuppressLint("NewApi")
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                if (position < videoPager.getCount() - 1 && position < allVideoList.size - 1) {
+                if (position < videoPager.count - 1 && position < allVideoList.size - 1) {
                     videoSliderBinding.videoTitle.text = allVideoList [position].getTitle()
 
                     if (Helper!!.getStatuss(String.valueOf(allVideoList [position].id))) {
@@ -118,7 +114,6 @@ class VideoSliderActivity : AppCompatActivity() {
                         likeVideo(position)
                     }
 
-
                     videoSliderBinding.videoShare.setOnClickListener  {
                         shareVideo(position)
                     }
@@ -132,7 +127,6 @@ class VideoSliderActivity : AppCompatActivity() {
                     videoSliderBinding.videoInfo.setOnClickListener {
                         showInfoDialog ( position )
                     }
-
 
                 }else{
                     videoSliderBinding.videoTitle.text =   allVideoList [allVideoList.size - 1].title
@@ -153,7 +147,6 @@ class VideoSliderActivity : AppCompatActivity() {
                         likeVideo(allVideoList.size - 1)
                     }
 
-
                     videoSliderBinding.videoShare.setOnClickListener {
                         shareVideo(allVideoList.size - 1)
                     }
@@ -170,13 +163,9 @@ class VideoSliderActivity : AppCompatActivity() {
                         showInfoDialog ( allVideoList.size - 1 )
 
                     }
-
                 }
 
-
                 }
-
-           
 
             override fun onPageSelected(position: Int) {
 
@@ -192,9 +181,6 @@ class VideoSliderActivity : AppCompatActivity() {
         videoSliderBinding.backImageView.setOnClickListener {
             finish()
         }
-
-
-
 
     }
 
@@ -213,8 +199,8 @@ class VideoSliderActivity : AppCompatActivity() {
         val tvDateModified = view.findViewById<TextView>(R.id.tv_date_taken)
         val imageresolution = view.findViewById<TextView>(R.id.iv_image_resolution)
 //        tvImageSize.text = humanReadableByteCountSI(allVideoModel.size.toLong())
-        tvImagePath.setText(allVideoModel.path)
-        tvImageName.setText(allVideoModel.title)
+        tvImagePath.text = allVideoModel.path
+        tvImageName.text = allVideoModel.title
         tvDateModified.text = convertTimeDateModified(allVideoModel.getDateAdded().toLong())
         button.setOnClickListener { alertDialog.dismiss() }
 
@@ -239,10 +225,8 @@ class VideoSliderActivity : AppCompatActivity() {
             bytes /= 1000
             ci.next()
         }
-        return kotlin.String.format("%.1f %cB", bytes / 1000.0, ci.current())
+        return String.format("%.1f %cB", bytes / 1000.0, ci.current())
     }
-
-
 
     @SuppressLint("NewApi")
     private fun likeVideo(i: Int) {
@@ -295,7 +279,7 @@ class VideoSliderActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 //            this.imageID = imageId
             this.deletePosition = i
-            val list: List<Uri> = java.util.ArrayList()
+            val list: List<Uri> = ArrayList()
 //            Collections.addAll(list, *uriList)
             val pendingIntent = MediaStore.createDeleteRequest(resolver, list)
             activity.startIntentSenderForResult(pendingIntent.intentSender, requestCode, null, 0, 0, 0, null
@@ -357,10 +341,6 @@ class VideoSliderActivity : AppCompatActivity() {
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_STREAM, uri)
         startActivity(Intent.createChooser(intent, "share via"))
-
-
-
-
     }
     class VideoPager : PagerAdapter() {
         override fun getCount(): Int {
@@ -404,7 +384,6 @@ class VideoSliderActivity : AppCompatActivity() {
             return POSITION_NONE
         }
     }
-
 
 }
 

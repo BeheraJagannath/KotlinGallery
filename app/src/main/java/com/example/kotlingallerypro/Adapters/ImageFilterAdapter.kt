@@ -38,19 +38,15 @@ class ImageFilterAdapter (val context: Context, val allFilter: MutableList<Image
             filterListener.onFilterClick(allFilter.get(position))
             Log.d("Filter", allFilter.get(position).toString())
 
-
-
         }
 
     }
-
     override fun getItemCount(): Int {
         return allFilter.size
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var imageView: ImageView? = itemView.findViewById(R.id.item_filter_image)
-
 
     }
 

@@ -32,7 +32,7 @@ import java.io.File
     }
 
     override fun onBindViewHolder(holder: VideoshowAdapter.ViewViewHolders, position: Int) {
-        val file: File = File(videosList.get(position).path)
+        val file = File(videosList.get(position).path)
         val videoModel: Videomodel = videosList[position]
 
         Glide.with(holder.itemView.getContext())
@@ -153,10 +153,4 @@ import java.io.File
         resetCurrentIndex()
         notifyItemRemoved(position)
     }
-
-
-
-
-
-
 }

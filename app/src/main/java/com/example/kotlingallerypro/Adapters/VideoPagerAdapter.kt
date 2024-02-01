@@ -16,13 +16,9 @@ import com.example.kotlingallerypro.Activity.VideoPlayerActivity
 import com.example.kotlingallerypro.Activity.VideoSliderActivity
 import com.example.kotlingallerypro.R
 import com.example.kotlingallerypro.modelclass.Videomodel
-
-//class VideoPagerAdapter {
-//}
 class VideoPagerAdapter(val context: Context, val videoList: ArrayList<Videomodel>, val viewPager: ViewPager): PagerAdapter() {
 
     lateinit var imageView: ImageView
-
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object` as View
@@ -33,8 +29,6 @@ class VideoPagerAdapter(val context: Context, val videoList: ArrayList<Videomode
             context.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = layoutInflater.inflate(R.layout.video_slider, null)
         imageView = view.findViewById(R.id.iv_video_slider)
-
-
 
         val allVideoModel = videoList [position]
         Glide.with(context).load(allVideoModel.path)

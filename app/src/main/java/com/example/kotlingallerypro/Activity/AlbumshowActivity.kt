@@ -33,15 +33,13 @@ import java.io.File
 
 class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
     companion object{
-
         lateinit var imageshowbinding : ActivityImageshowBinding
-
 
          var folderPath: String? = null
          var folderName: String? = null
          @SuppressLint("StaticFieldLeak")
          lateinit var adapter: AlbumshowAdapter
-         var allPictures: ArrayList<AlbumPictureModel>? = null
+         lateinit var allPictures: ArrayList<AlbumPictureModel>
 
           private var actionMode: ActionMode? = null
           var action : Boolean?=false
@@ -49,17 +47,11 @@ class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
 //         lateinit var actionModeCallback: ActionModeCallback
          lateinit var dialog  : Dialog
 
-
-
-              private val deletePosition: MutableList<Int?> = java.util.ArrayList()
+              private val deletePosition: MutableList<Int?> = ArrayList()
 
               private fun getDeletePosition(): List<Int?> {
                return deletePosition
         }
-
-
-
-
 
     }
 
@@ -69,15 +61,10 @@ class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
 
 //        actionModeCallback = ActionModeCallback(this,contentResolver)
 
-
-
-
         folderPath = intent.getStringExtra("folderPath")
         folderName = intent.getStringExtra("folderName")
 
-
-
-        imageshowbinding.xTitle.setText(folderName)
+        imageshowbinding.xTitle.text = folderName
         imageshowbinding.ivBk.setOnClickListener {
             finish()
         }
@@ -93,26 +80,20 @@ class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
 
         }
 
-
-
-
     }
-
     override fun onResume() {
         super.onResume()
-        allPictures = java.util.ArrayList()
+        allPictures = ArrayList()
         allPictures = getAllImageByFolder(folderPath.toString())
-        imageshowbinding.imageshowRecycler.setLayoutManager(GridLayoutManager(this, Utils.COLUMN_TYPE))
-        adapter = AlbumshowAdapter(allPictures!!, this,this)
+        imageshowbinding.imageshowRecycler.layoutManager = GridLayoutManager(this, Utils.COLUMN_TYPE)
+        adapter = AlbumshowAdapter(allPictures, this,this)
 
-        imageshowbinding.imageshowRecycler.setAdapter(adapter)
+        imageshowbinding.imageshowRecycler.adapter = adapter
         adapter.notifyDataSetChanged()
     }
 
-
-
-    fun getAllImageByFolder(path: String): java.util.ArrayList<AlbumPictureModel>? {
-        var images :java.util.ArrayList<AlbumPictureModel> = java.util.ArrayList<AlbumPictureModel>()
+    fun getAllImageByFolder(path: String): ArrayList<AlbumPictureModel> {
+        var images :ArrayList<AlbumPictureModel> = ArrayList<AlbumPictureModel>()
         val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val projection = arrayOf(
             MediaStore.Images.ImageColumns._ID,
@@ -159,7 +140,7 @@ class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
             cursor.close()
 
         }
-        val reSelection : java.util.ArrayList<AlbumPictureModel> = java.util.ArrayList<AlbumPictureModel>()
+        val reSelection : ArrayList<AlbumPictureModel> = ArrayList<AlbumPictureModel>()
         for (i in images.size - 1 downTo -1 + 1) {
             reSelection.add(images[i])
         }
@@ -231,7 +212,7 @@ class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
     private fun shareImages() {
 
             val sharePath = adapter.getDeleteItems()
-            val files = java.util.ArrayList<Uri>()
+            val files = ArrayList<Uri>()
 
             for (s in sharePath.values) {
                 val file = File(s)

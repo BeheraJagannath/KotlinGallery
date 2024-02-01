@@ -15,7 +15,6 @@ import com.example.kotlingallerypro.R
 import com.example.kotlingallerypro.modelclass.AllImagesModel
 import com.example.kotlingallerypro.modelclass.ImageSliderModel
 import java.io.File
-
 class ImageAdapter ( var allImagesModelList: List<AllImagesModel>, var imageList: List<String> ,var context: Context ) :
     RecyclerView.Adapter<ImageAdapter.MyClassView?>() {
 

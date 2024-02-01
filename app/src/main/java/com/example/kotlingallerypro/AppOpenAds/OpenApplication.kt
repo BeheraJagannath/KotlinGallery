@@ -24,9 +24,7 @@ class OpenApplication : Application() {
         appOpenManager =
             AppOpenManager(this)
 
-
     }
-
     companion object {
         lateinit var appOpenManager: AppOpenManager
     }

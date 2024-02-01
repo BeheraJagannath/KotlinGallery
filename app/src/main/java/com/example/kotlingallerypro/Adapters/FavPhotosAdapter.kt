@@ -19,8 +19,6 @@ import com.squareup.picasso.Picasso
 import java.io.File
 import java.util.*
 
-//class FavPhotosAdapter {
-//}
 class FavPhotosAdapter(pictureList: ArrayList<AlbumPictureModel>, context: Context ) :
     RecyclerView.Adapter<FavPhotosAdapter.PictViewHolder?>() {
     private val pictureList: List<AlbumPictureModel>
@@ -48,14 +46,10 @@ class FavPhotosAdapter(pictureList: ArrayList<AlbumPictureModel>, context: Conte
 
         }
 
-
     }
-
     override fun getItemCount(): Int {
         return pictureList.size
     }
-
-
     inner class PictViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var relativeLayout: RelativeLayout
         var imageView: ImageView

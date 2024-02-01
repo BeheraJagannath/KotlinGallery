@@ -13,8 +13,6 @@ import com.example.kotlingallerypro.Activity.VideoshowActivity
 import com.example.kotlingallerypro.R
 import com.example.kotlingallerypro.modelclass.VideoFolderModel
 import java.io.File
-
-
 class VideoFolderAdapter(
     val context: Context?, private val album: ArrayList<String>?,
     private val videoFolderList: ArrayList<VideoFolderModel>?,

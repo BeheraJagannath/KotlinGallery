@@ -90,32 +90,6 @@ public class AppOpenManager implements LifecycleObserver, Application.ActivityLi
             return;
         }
 
-//        loadCallback = new AppOpenAd.AppOpenAdLoadCallback() {
-//
-//            //     Called when an app open ad has loaded.
-//
-//            @Override
-//            public void onAdLoaded(AppOpenAd ad) {
-//
-//                if (isFirstTime){
-//                    ad.show(currentActivity);
-//                    isFirstTime = false;
-//                    fetchAd();
-//                }
-//
-//                AppOpenManager.this.appOpenAd = ad;
-//                AppOpenManager.this.loadTime = (new Date()).getTime();
-//            }
-//
-//            // Called when an app open ad has failed to load.
-//
-//            @Override
-//            public void onAdFailedToLoad(LoadAdError loadAdError) {
-//                // Handle the error.
-//            }
-//
-//        };
-
         appOpenAd.setListener(new AppOpenAdsEventsListener() {
             @Override
             public void onAdLoaded() {
@@ -149,15 +123,6 @@ public class AppOpenManager implements LifecycleObserver, Application.ActivityLi
         appOpenAd.loadAd( "float-13354");
         appOpenAd.setOrientation(AdOrientation.PORTRAIT);
         appOpenAd.show() ;
-
-//        appOpenAd.setListener(null);
-
-//
-//        AdRequest request = getAdRequest();
-//        AppOpenAd.load(
-//                openApplication, AD_UNIT_ID, request,
-//                AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT, loadCallback);
-        // We will implement this below.
 
     }
 

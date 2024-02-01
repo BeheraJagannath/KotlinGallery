@@ -13,12 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.kotlingallerypro.Activity.AlbumshowActivity
 import com.example.kotlingallerypro.R
 import com.example.kotlingallerypro.modelclass.AlbumDetail
-
-
-//class AlbumFolderAdapter {
-
-//}
-    class AlbumFolderAdapter(album: ArrayList<AlbumDetail>, context: Context) :
+class AlbumFolderAdapter(album: ArrayList<AlbumDetail>, context: Context) :
         RecyclerView.Adapter<AlbumFolderAdapter.AlbumViewHolder>() {
         private val album: ArrayList<AlbumDetail>
         private val context: Context
@@ -34,14 +29,12 @@ import com.example.kotlingallerypro.modelclass.AlbumDetail
 
             Glide.with(context).load(albumModel.firstImage).apply(RequestOptions().centerCrop())
                 .into(holder.imageView)
-//            Picasso.get().load(File(albumModel.getFirstImage())).fit().centerCrop()
-//                .into(holder.imageView)
-            val folderName: String = albumModel.getFolderName()
-            val folderTotalImage = "" + albumModel.getNumberOfImage()
-            val path: String = albumModel.getPath()
-            holder.albumName.setText(folderName)
-            holder.albumName.setSelected(true)
-            holder.totalImage.setText(folderTotalImage)
+            val folderName: String = albumModel.folderName
+            val folderTotalImage = "" + albumModel.numberOfImage
+            val path: String = albumModel.path
+            holder.albumName.text = folderName
+            holder.albumName.isSelected = true
+            holder.totalImage.text = folderTotalImage
             holder.itemView.setOnClickListener{v->
                 var intent = Intent(context, AlbumshowActivity::class.java)
                 intent.putExtra("folderPath", path)

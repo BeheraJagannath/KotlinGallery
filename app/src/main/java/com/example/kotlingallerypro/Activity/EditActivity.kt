@@ -37,18 +37,12 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.ArrayList
-
 class EditActivity : AppCompatActivity() , FilterListener {
     lateinit var editBinding: ActivityEditBinding
     private var msConn: MediaScannerConnection? = null
     private var wasDrawCanvasPositioned = false
     var uri: Uri? = null
     lateinit var bitmap: Bitmap
-
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        editBinding = DataBindingUtil. setContentView(this ,R.layout.activity_edit)
@@ -89,9 +83,7 @@ class EditActivity : AppCompatActivity() , FilterListener {
 
         }
 
-
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -146,33 +138,32 @@ class EditActivity : AppCompatActivity() , FilterListener {
         return Bitmap.createScaledBitmap(image, width, height, true)
     }
 
-
     private fun setupAspectRatioButtons() {
 
         editBinding.ivCrop.setOnClickListener {
-            if (editBinding.cropOpLayout.getVisibility() == View.VISIBLE) {
-                editBinding.cropOpLayout.setVisibility(View.GONE)
+            if (editBinding.cropOpLayout.visibility== View.VISIBLE) {
+                editBinding.cropOpLayout.visibility = View.GONE
                 editBinding.ivCrop.setColorFilter(ContextCompat.getColor(this@EditActivity, R.color.textcolor),
                     PorterDuff.Mode.SRC_IN)
             } else {
-                editBinding.cropOpLayout.setVisibility(View.VISIBLE)
+                editBinding.cropOpLayout.visibility = View.VISIBLE
                 editBinding.ivCrop.setColorFilter(ContextCompat.getColor(this@EditActivity, R.color.teal_200),
                     PorterDuff.Mode.SRC_IN)
             }
 
         }
         editBinding.ivCustomCrop.setOnClickListener {
-            editBinding.cropimageView.setCropMode(com.isseiaoki.simplecropview.CropImageView.CropMode.CUSTOM)
+            editBinding.cropimageView.setCropMode(CropImageView.CropMode.CUSTOM)
 
 
         }
         editBinding.ivRoate.setOnClickListener {
-            editBinding . cropimageView.rotateImage(com.isseiaoki.simplecropview.CropImageView.RotateDegrees.ROTATE_90D);
+            editBinding . cropimageView.rotateImage(CropImageView.RotateDegrees.ROTATE_90D);
 
         }
         editBinding.ivLeftRight.setOnClickListener {
 
-            val drawable =   editBinding.cropimageView.getDrawable( ) as BitmapDrawable
+            val drawable =   editBinding.cropimageView.drawable as BitmapDrawable
             val bitmap = drawable.bitmap
 
             val matrix = Matrix()
@@ -184,11 +175,11 @@ class EditActivity : AppCompatActivity() , FilterListener {
                 bitmap.height,
                 matrix,
                 true)
-            editBinding.cropimageView.setImageBitmap(bOutput)
+            editBinding.cropimageView.imageBitmap = bOutput
 
         }
         editBinding.ivTopBottom.setOnClickListener {
-            val drawable = editBinding.cropimageView.getDrawable() as BitmapDrawable
+            val drawable = editBinding.cropimageView.drawable as BitmapDrawable
 
             val bitmap = drawable.bitmap
 
@@ -201,20 +192,20 @@ class EditActivity : AppCompatActivity() , FilterListener {
                 bitmap.height,
                 matrix,
                 true)
-            editBinding.cropimageView.setImageBitmap(bOutput)
+            editBinding.cropimageView.imageBitmap = bOutput
 
         }
         editBinding.tvCropFree.setOnClickListener{
-            editBinding.tvCropFree.setBackground(resources.getDrawable(R.drawable.crop_image_item))
+            editBinding.tvCropFree.background = resources.getDrawable(R.drawable.crop_image_item)
             editBinding.tvCropFree.setTextColor(ContextCompat.getColor(this@EditActivity,
                 R.color.white))
-            editBinding.tvCrop11.setBackground(null)
+            editBinding.tvCrop11.background = null
             editBinding.tvCrop11.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop43.setBackground(null)
+            editBinding.tvCrop43.background = null
             editBinding.tvCrop43.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop169.setBackground(null)
+            editBinding.tvCrop169.background = null
             editBinding.tvCrop169.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCropOther.setBackground(null)
+            editBinding.tvCropOther.background = null
             editBinding.tvCropOther.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
 
 
@@ -222,16 +213,16 @@ class EditActivity : AppCompatActivity() , FilterListener {
 
         }
         editBinding.tvCrop11.setOnClickListener{
-            editBinding.tvCropFree.setBackground(null)
+            editBinding.tvCropFree.background = null
             editBinding.tvCropFree.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop11.setBackground(resources.getDrawable(R.drawable.crop_image_item))
+            editBinding.tvCrop11.background = resources.getDrawable(R.drawable.crop_image_item)
             editBinding.tvCrop11.setTextColor(ContextCompat.getColor(this@EditActivity,
                 R.color.white))
-            editBinding.tvCrop43.setBackground(null)
+            editBinding.tvCrop43.background = null
             editBinding.tvCrop43.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop169.setBackground(null)
+            editBinding.tvCrop169.background = null
             editBinding.tvCrop169.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCropOther.setBackground(null)
+            editBinding.tvCropOther.background = null
             editBinding.tvCropOther.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
 
 
@@ -239,16 +230,16 @@ class EditActivity : AppCompatActivity() , FilterListener {
 
         }
         editBinding.tvCrop43.setOnClickListener{
-            editBinding.tvCropFree.setBackground(null)
+            editBinding.tvCropFree.background = null
             editBinding.tvCropFree.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop11.setBackground(null)
+            editBinding.tvCrop11.background = null
             editBinding.tvCrop11.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop43.setBackground(resources.getDrawable(R.drawable.crop_image_item))
+            editBinding.tvCrop43.background = resources.getDrawable(R.drawable.crop_image_item)
             editBinding.tvCrop43.setTextColor(ContextCompat.getColor(this@EditActivity,
                 R.color.white))
-            editBinding.tvCrop169.setBackground(null)
+            editBinding.tvCrop169.background = null
             editBinding.tvCrop169.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCropOther.setBackground(null)
+            editBinding.tvCropOther.background = null
             editBinding.tvCropOther.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
 
 
@@ -256,16 +247,16 @@ class EditActivity : AppCompatActivity() , FilterListener {
 
         }
         editBinding.tvCrop169.setOnClickListener {
-            editBinding.tvCropFree.setBackground(null)
+            editBinding.tvCropFree.background = null
             editBinding.tvCropFree.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop11.setBackground(null)
+            editBinding.tvCrop11.background = null
             editBinding.tvCrop11.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop43.setBackground(null)
+            editBinding.tvCrop43.background = null
             editBinding.tvCrop43.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop169.setBackground(resources.getDrawable(R.drawable.crop_image_item))
+            editBinding.tvCrop169.background = resources.getDrawable(R.drawable.crop_image_item)
             editBinding.tvCrop169.setTextColor(ContextCompat.getColor(this@EditActivity,
                 R.color.white))
-            editBinding.tvCropOther.setBackground(null)
+            editBinding.tvCropOther.background = null
             editBinding.tvCropOther.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
 
 
@@ -274,15 +265,15 @@ class EditActivity : AppCompatActivity() , FilterListener {
 
         }
         editBinding.tvCropOther.setOnClickListener {
-            editBinding.tvCropFree.setBackground(null)
+            editBinding.tvCropFree.background = null
             editBinding.tvCropFree.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop11.setBackground(null)
+            editBinding.tvCrop11.background = null
             editBinding.tvCrop11.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop43.setBackground(null)
+            editBinding.tvCrop43.background = null
             editBinding.tvCrop43.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCrop169.setBackground(null)
+            editBinding.tvCrop169.background = null
             editBinding.tvCrop169.setTextColor(ContextCompat.getColor(this@EditActivity, R.color.textcolor))
-            editBinding.tvCropOther.setBackground(resources.getDrawable(R.drawable.crop_image_item))
+            editBinding.tvCropOther.background = resources.getDrawable(R.drawable.crop_image_item)
             editBinding.tvCropOther.setTextColor(ContextCompat.getColor(this@EditActivity,
                 R.color.white))
             slideShowPopUp()
@@ -294,12 +285,9 @@ class EditActivity : AppCompatActivity() , FilterListener {
 
             saveimgae(bitmap = editBinding.cropimageView.croppedBitmap)
 
-
         }
 
-
     }
-
     private fun slideShowPopUp() {
         val radio1 = arrayOf(resources.getString(R.string.one_one))
         val radio2 = arrayOf(resources.getString(R.string.two_two))
@@ -312,7 +300,6 @@ class EditActivity : AppCompatActivity() , FilterListener {
 //        dial.setContentView(R.layout.slideshow_dialog)
         dial.window!!.setBackgroundDrawable(ColorDrawable(0))
         dial.setCanceledOnTouchOutside(true)
-
     }
 
     private fun saveimgae(bitmap: Bitmap?) {
@@ -340,10 +327,7 @@ class EditActivity : AppCompatActivity() , FilterListener {
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
 
-
     }
-
-
 
     fun scanPhoto(imageFileName: String?) {
         msConn = MediaScannerConnection(this, object : MediaScannerConnectionClient {
@@ -368,6 +352,4 @@ class EditActivity : AppCompatActivity() , FilterListener {
             editBinding.cropimageView.setImageBitmap(ImageFilter.applyFilter(bitmap, filter))
         }
     }
-
-
 }

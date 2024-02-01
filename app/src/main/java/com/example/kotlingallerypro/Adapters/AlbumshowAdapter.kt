@@ -17,10 +17,6 @@ import com.bumptech.glide.Glide
 import com.example.kotlingallerypro.Interface.SelectedVideoItem
 import com.example.kotlingallerypro.R
 import com.example.kotlingallerypro.modelclass.AlbumPictureModel
-
-//class AlbumshowAdapter {
-//}
-
 class AlbumshowAdapter(private var pictureList: ArrayList<AlbumPictureModel>, private var context: Context, private var selectedVideoItem: SelectedVideoItem) :
 
     RecyclerView.Adapter<AlbumshowAdapter.PictViewHolder>(){
@@ -28,10 +24,7 @@ class AlbumshowAdapter(private var pictureList: ArrayList<AlbumPictureModel>, pr
              lateinit var selected_items: SparseBooleanArray
              var current_selected_idx = -1
              var deleteImageMap = HashMap<Int, String>()
-
-
         }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.image_files, parent, false)
@@ -72,7 +65,6 @@ class AlbumshowAdapter(private var pictureList: ArrayList<AlbumPictureModel>, pr
         }
 
     }
-
     private fun toggleCheckedIcon(holder: PictViewHolder, position: Int) {
         if (selected_items.get(position, false)) {
 
@@ -99,7 +91,6 @@ class AlbumshowAdapter(private var pictureList: ArrayList<AlbumPictureModel>, pr
         current_selected_idx = -1
     }
 
-
     override fun getItemCount(): Int {
        return pictureList.size
     }
@@ -119,7 +110,6 @@ class AlbumshowAdapter(private var pictureList: ArrayList<AlbumPictureModel>, pr
             frameLayout = view.findViewById(R.id.item_image)
         }
     }
-
     init {
         this.pictureList = pictureList
         this.context = context
@@ -127,7 +117,6 @@ class AlbumshowAdapter(private var pictureList: ArrayList<AlbumPictureModel>, pr
             selected_items = SparseBooleanArray()
 
     }
-
     fun clearSelections() {
         selected_items.clear()
         notifyDataSetChanged()
@@ -160,8 +149,6 @@ class AlbumshowAdapter(private var pictureList: ArrayList<AlbumPictureModel>, pr
         resetCurrentIndex()
         notifyItemRemoved(position)
     }
-
-
 }
 
 

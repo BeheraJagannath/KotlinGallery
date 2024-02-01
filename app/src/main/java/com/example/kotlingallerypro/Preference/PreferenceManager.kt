@@ -10,8 +10,8 @@ class PreferenceManager (context: Context){
 
     fun saveGalleryView(isAlbumView: Boolean) {
         editor = sharedPreferences!!.edit()
-        editor?.putBoolean("galleryView", isAlbumView)
-        editor?.apply()
+        editor.putBoolean("galleryView", isAlbumView)
+        editor.apply()
     }
 
     fun getGalleryView(): Boolean {
@@ -20,8 +20,8 @@ class PreferenceManager (context: Context){
 
     fun saveSecurityQuestion(question: String?) {
         editor = sharedPreferences!!.edit()
-        editor?.putString("sec_ques", question)
-        editor?.apply()
+        editor.putString("sec_ques", question)
+        editor.apply()
     }
 
     fun getSecurityQuestion(): String? {
@@ -30,8 +30,8 @@ class PreferenceManager (context: Context){
 
     fun saveSecurityAnswer(answer: String?) {
         editor = sharedPreferences!!.edit()
-        editor?.putString("sec_ans", answer)
-        editor?.apply()
+        editor.putString("sec_ans", answer)
+        editor.apply()
     }
 
     fun getSecurityAnswer(): String? {
@@ -40,8 +40,8 @@ class PreferenceManager (context: Context){
 
     fun savePin(pin: String?) {
         editor = sharedPreferences!!.edit()
-        editor?.putString("pin", pin)
-        editor?.apply()
+        editor.putString("pin", pin)
+        editor.apply()
     }
 
     fun getPin(): String? {
@@ -50,8 +50,8 @@ class PreferenceManager (context: Context){
 
     fun pinSet(isSeteed: Boolean) {
         editor = sharedPreferences!!.edit()
-        editor?.putBoolean("pinSet", isSeteed)
-        editor?.apply()
+        editor.putBoolean("pinSet", isSeteed)
+        editor.apply()
     }
 
     fun isPinSeted(): Boolean {

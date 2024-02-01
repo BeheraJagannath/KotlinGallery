@@ -34,19 +34,14 @@ import com.google.android.gms.ads.nativead.NativeAd
 
 class Video_fragment : Fragment() {
     companion object {
-
         lateinit var videoFolderAdapter: VideoFolderAdapter
         private val videoFolderName: ArrayList<String> = ArrayList()
         lateinit var videoRecycler:RecyclerView
         private lateinit var myReceiver: MyReceiver
-
-
     }
 
     class MyReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-
-
         }
     }
     @SuppressLint("ResourceAsColor")
@@ -57,21 +52,13 @@ class Video_fragment : Fragment() {
             myReceiver,
             IntentFilter("TAG_REFRESH")
         )
-
-
     }
-
     @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showVideoFolder()
         videoFolderAdapter.notifyDataSetChanged()
     }
-
-
-
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View {
         // Inflate the layout for this fragment
 //        val binding = DataBindingUtil.inflate<FragmentVideoFragmentBinding>(inflater,
@@ -79,9 +66,6 @@ class Video_fragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_video_fragment, container, false)
         videoRecycler = view.findViewById(R.id.video_recycler)
         showad(view)
-
-
-
 
         return view
     }
@@ -105,18 +89,12 @@ class Video_fragment : Fragment() {
 
         adLoader.loadAd(AdRequest.Builder().build())
     }
-
     private fun showVideoFolder() {
-        videoRecycler.setLayoutManager(GridLayoutManager(context,Utils.COLUMN_TYPE))
+        videoRecycler.layoutManager = GridLayoutManager(context,Utils.COLUMN_TYPE)
         videoRecycler.isNestedScrollingEnabled = false
         videoFolderAdapter = VideoFolderAdapter(context, videoFolderName, getAllVideoFolder())
-        videoRecycler.setAdapter(videoFolderAdapter)
-
-
+        videoRecycler.adapter = videoFolderAdapter
     }
-
-
-
     private fun getAllVideoFolder(): ArrayList<VideoFolderModel>? {
         videoFolderName.clear()
 
@@ -128,7 +106,6 @@ class Video_fragment : Fragment() {
             MediaStore.Video.VideoColumns._ID,
             MediaStore.Video.VideoColumns.DATA
         )
-
 
         val cursor = requireContext().contentResolver.query(uri, projection, null, null, null)
 

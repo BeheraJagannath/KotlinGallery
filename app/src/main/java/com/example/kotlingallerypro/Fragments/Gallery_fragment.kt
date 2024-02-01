@@ -23,6 +23,7 @@ import com.example.kotlingallerypro.Adapters.AlbumFolderAdapter
 import com.example.kotlingallerypro.R
 import com.example.kotlingallerypro.Utils.Utils
 import com.example.kotlingallerypro.modelclass.AlbumDetail
+import com.example.kotlingallerypro.modelclass.VideoFolderModel
 import com.greedygame.core.adview.general.AdLoadCallback
 import com.greedygame.core.adview.general.GGAdview
 import com.greedygame.core.models.general.AdErrors
@@ -33,14 +34,10 @@ class Gallery_fragment : Fragment() {
     companion object{
         lateinit var recycler : RecyclerView
 //        lateinit var ggAdView : GGAdview
-        lateinit var gridLayoutManager: GridLayoutManager
-        lateinit var albumFolderAdapter: AlbumFolderAdapter
-        var fragmentActivity: FragmentActivity? = null
         private lateinit var myReceiver: MyReceiver
         lateinit var your_parent_layout: LinearLayout
-
+        private val videoFolderName: ArrayList<String> = ArrayList()
     }
-
     class MyReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
 
@@ -54,8 +51,6 @@ class Gallery_fragment : Fragment() {
             myReceiver ,
             IntentFilter("TAG_REFRESH")
         )
-
-
     }
 
     @SuppressLint("NewApi")
@@ -63,8 +58,6 @@ class Gallery_fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showAlbumFolder()
     }
-
-
     private var pictureFolderPath: String? = null
     private var folderName: String? = null
 
@@ -79,7 +72,6 @@ class Gallery_fragment : Fragment() {
        your_parent_layout = view.findViewById(R.id.your_parent_layout)
 
 //       mAdView = view. findViewById(R.id.adView)
-
 
 //       val adRequest =  AdRequest.Builder().build()
 //       ggAdView.loadAd(adRequest)
@@ -111,98 +103,72 @@ class Gallery_fragment : Fragment() {
            }
        })
 
-
-
-
-
        return view
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
         showAlbumFolder()
-
     }
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun showAlbumFolder() {
-        recycler . setLayoutManager ( GridLayoutManager (context, Utils.COLUMN_TYPE))
+        recycler . layoutManager =  GridLayoutManager (context, Utils.COLUMN_TYPE)
         recycler . setHasFixedSize(true)
-        Log.d("========", "onCreateView: " + getPicturePaths())
-        val albumAdapter = getPicturePaths()?.let { context?.let { it1 ->
+        Log.d("========", "onCreateView: " + getAllImageFolder().size)
+        val albumAdapter = getAllImageFolder().let { context?.let { it1 ->
             AlbumFolderAdapter(it,
                 it1)
         } }
-        recycler.setAdapter ( albumAdapter )
-
-
+        recycler.adapter =  albumAdapter
     }
 
+    private fun getAllImageFolder(): ArrayList<AlbumDetail> {
+        videoFolderName.clear()
 
-    @SuppressLint("UseRequireInsteadOfGet")
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private fun getPicturePaths(): ArrayList<AlbumDetail>? {
-        val picFolder: ArrayList < AlbumDetail > = ArrayList < AlbumDetail >()
-        val picPaths = ArrayList<String>()
+        val tempVideoFolderList = ArrayList<AlbumDetail>()
+
         val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+
         val projection = arrayOf(
+            MediaStore.Images.ImageColumns._ID,
             MediaStore.Images.ImageColumns.DATA,
             MediaStore.Images.ImageColumns.DISPLAY_NAME,
-            MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
-            MediaStore.Images.Media.BUCKET_ID
+            MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME
         )
-        val cursor = context!!.contentResolver.query(uri, projection, null, null, null)
-        try {
-            cursor?.moveToFirst()
-            do {
-                val albumModel = AlbumDetail()
-                val name =
-                    cursor!!.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME))
-                val folder =
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
-                val dataPath =
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
-                var folderPath = dataPath.substring(0, dataPath.lastIndexOf("$folder/"))
-                folderPath = "$folderPath$folder/"
-                if (!picPaths.contains(folderPath)) {
-                    picPaths.add(folderPath)
-                    albumModel.setPath(folderPath)
-                    albumModel.setFolderName(folder)
-                    albumModel.setFirstImage(dataPath)
-                    albumModel.addpics()
-                    picFolder.add(albumModel)
+
+        val cursor = requireContext().contentResolver.query(uri, projection, null, null, null)
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                val videoFolderModel = AlbumDetail()
+                val path =
+                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA))
+
+                val slashFirstIndex = path.lastIndexOf("/")
+                val subString = path.substring(0,slashFirstIndex)
+                val index = subString.lastIndexOf("/")
+                val folderName = subString.substring(index + 1, slashFirstIndex)
+                if (!videoFolderName.contains(subString)) {
+                    videoFolderName.add(subString)
+                    videoFolderModel.folderName = folderName
+                    videoFolderModel.path = subString
+                    videoFolderModel.firstImage = path
+                    videoFolderModel.addpics()
+                    tempVideoFolderList.add(videoFolderModel)
                 } else {
-                    for (i in picFolder.indices) {
-                        if (picFolder[i].getPath().equals(folderPath)) {
-                            picFolder[i].setFirstImage(dataPath)
-                            picFolder[i].addpics()
+                    for (i in tempVideoFolderList.indices) {
+                        if (tempVideoFolderList[i].path.equals(subString)) {
+                            tempVideoFolderList[i].firstImage = path
+                            tempVideoFolderList[i].addpics()
                         }
                     }
                 }
-            } while (cursor!!.moveToNext())
+            }
             cursor.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            recycler.setVisibility(View.GONE)
-//            textViewNoImage.setVisibility(View.VISIBLE)
         }
-        for (i in picFolder.indices) {
-            Log.d(
-                "GalleryFragment.Java",
-                """getPicturePaths: ${picFolder[i].getFolderName().toString() } path : ${ picFolder[i].getPath().toString()} number of pic : ${picFolder[i]
-                    .getNumberOfImage().toString() } """
-            )
-        }
-        return picFolder
+        return tempVideoFolderList
     }
-
-
-
 }
 
 

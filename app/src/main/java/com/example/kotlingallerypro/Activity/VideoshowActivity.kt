@@ -41,7 +41,7 @@ class VideoshowActivity : AppCompatActivity() ,VideoClicklistener {
         private var action : Boolean?=false
 
 
-        private val deletePosition: MutableList<Int?> = java.util.ArrayList()
+        private val deletePosition: MutableList<Int?> = ArrayList()
 
         private fun getDeletePosition(): List<Int?> {
             return deletePosition
@@ -94,10 +94,10 @@ class VideoshowActivity : AppCompatActivity() ,VideoClicklistener {
             videobinding.videoshowRecycler.setHasFixedSize(true)
             videobinding.videoshowRecycler.setItemViewCacheSize(20)
             videobinding.videoshowRecycler.setDrawingCacheEnabled(true)
-            videobinding.videoshowRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH)
+            videobinding.videoshowRecycler.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH
             videobinding.videoshowRecycler.setNestedScrollingEnabled(false)
-            videobinding.videoshowRecycler.setAdapter(videoshowAdapter)
-            videobinding.videoshowRecycler.setLayoutManager(GridLayoutManager(this, Utils.COLUMN_TYPE))
+            videobinding.videoshowRecycler.adapter = (videoshowAdapter)
+            videobinding.videoshowRecycler.layoutManager = (GridLayoutManager(this, Utils.COLUMN_TYPE))
         } else {
             Toast.makeText(this, "can't find any videos", Toast.LENGTH_SHORT).show()
         }
@@ -106,8 +106,8 @@ class VideoshowActivity : AppCompatActivity() ,VideoClicklistener {
     @RequiresApi(api = Build.VERSION_CODES.Q)
     private fun getallVideoFromFolder(
         context: Context, name: String,
-    ): java.util.ArrayList<Videomodel>? {
-        val list = java.util.ArrayList<Videomodel>()
+    ): ArrayList<Videomodel>? {
+        val list = ArrayList<Videomodel>()
         val uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
         val orderBy = MediaStore.Video.Media.DATE_ADDED
         val projection = arrayOf(
@@ -241,7 +241,7 @@ class VideoshowActivity : AppCompatActivity() ,VideoClicklistener {
     private fun shareImages() {
 
         val sharePath = videoshowAdapter.getDeleteItems()
-        val files = java.util.ArrayList<Uri>()
+        val files = ArrayList<Uri>()
 
         for (s in sharePath.values) {
             val file = File(s)
@@ -367,8 +367,5 @@ class VideoshowActivity : AppCompatActivity() ,VideoClicklistener {
             deletePosition.clear()
         }
     }
-
-
-
 
 }

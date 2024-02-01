@@ -18,10 +18,8 @@ import com.example.kotlingallerypro.R
 import com.example.kotlingallerypro.modelclass.AlbumImageSliderModel
 import com.example.kotlingallerypro.modelclass.Videomodel
 import com.example.kotlingallerypro.modelclass.VideosliderModel
-
 class FavVideoAdapter(val context: Context, private val albumvdopic: ArrayList<Videomodel>, val clickListener: AlbumClickInterface)
     : RecyclerView.Adapter<FavVideoAdapter.PictuViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int, ): PictuViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.album_folder, parent, false)
@@ -42,7 +40,6 @@ class FavVideoAdapter(val context: Context, private val albumvdopic: ArrayList<V
 
         }
     }
-
     override fun getItemCount(): Int {
         return albumvdopic.size
 
@@ -52,6 +49,4 @@ class FavVideoAdapter(val context: Context, private val albumvdopic: ArrayList<V
         var tvName: TextView = itemView.findViewById(R.id.name_text)
 
     }
-
-
 }

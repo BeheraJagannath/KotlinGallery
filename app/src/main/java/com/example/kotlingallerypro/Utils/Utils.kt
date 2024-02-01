@@ -7,5 +7,4 @@ class Utils {
         var isList = false
         var refresh = false
     }
-
 }

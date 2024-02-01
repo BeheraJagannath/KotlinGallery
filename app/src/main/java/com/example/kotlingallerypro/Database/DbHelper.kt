@@ -12,18 +12,11 @@ import com.example.kotlingallerypro.modelclass.FavModel
 
 @RequiresApi(Build.VERSION_CODES.P)
 class DbHelper(context: Context?, factory: SQLiteDatabase.CursorFactory? ) : SQLiteOpenHelper(context, "FAVOURITE.DB", factory, 1) {
-
-    companion object{
-
-    }
-
     private val DB_NAME = "FAVOURITE.DB"
     private val DB_VERSION = 1
     private val DB_TABLE = "FavouriteImage"
     private val COL_ID = "Id"
     private val COL_FAV_STATUS = "FavStatus"
-
-
 
     override fun onCreate(db: SQLiteDatabase?) {
         if (db != null) {

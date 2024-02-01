@@ -61,9 +61,6 @@ class VideoPlayerActivity : AppCompatActivity() , View.OnClickListener , Gesture
     lateinit var volumedialogIcon: ImageView
     lateinit var brightdealogicon : ImageView
 
-
-
-
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,9 +94,6 @@ class VideoPlayerActivity : AppCompatActivity() , View.OnClickListener , Gesture
         video_title.text = VideoSliderActivity .allVideoList[position].title
 
 
-
-
-
         play_button.setOnClickListener(this)
         back.setOnClickListener(this)
         forward.setOnClickListener(this)
@@ -119,7 +113,7 @@ class VideoPlayerActivity : AppCompatActivity() , View.OnClickListener , Gesture
 
     private fun playVideo() {
         simpleExoPlayer = SimpleExoPlayer.Builder(this).build()
-        playerview.setPlayer(simpleExoPlayer)
+        playerview.player = simpleExoPlayer
         val mediaItem: MediaItem = MediaItem.fromUri(VideoSliderActivity.allVideoList[position].path)
         simpleExoPlayer.setMediaItem(mediaItem)
         simpleExoPlayer.prepare()
@@ -127,9 +121,9 @@ class VideoPlayerActivity : AppCompatActivity() , View.OnClickListener , Gesture
         simpleExoPlayer.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(state: Int) {
                 if (state == Player.STATE_IDLE || state == Player.STATE_ENDED) {
-                    playerview.setKeepScreenOn(false)
+                    playerview.keepScreenOn = false
                 } else {
-                    playerview.setKeepScreenOn(true)
+                    playerview.keepScreenOn = true
                 }
             }
         })
@@ -435,11 +429,4 @@ class VideoPlayerActivity : AppCompatActivity() , View.OnClickListener , Gesture
 
         return true
     }
-
-
-
-
-
-
-
 }

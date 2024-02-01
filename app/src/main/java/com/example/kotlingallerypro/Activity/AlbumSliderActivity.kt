@@ -35,8 +35,6 @@ import java.util.*
 
 class AlbumSliderActivity : AppCompatActivity() {
     companion object{
-
-
         lateinit var allImage: ArrayList < AlbumPictureModel >
         lateinit var  list: ArrayList<Uri>
         var position = 0
@@ -96,12 +94,7 @@ class AlbumSliderActivity : AppCompatActivity() {
             return format.format(date)
         }
 
-
-
-
-
     }
-
 
     lateinit var viewPager: ViewPager
     @SuppressLint("NewApi")
@@ -118,11 +111,9 @@ class AlbumSliderActivity : AppCompatActivity() {
         image_delete = findViewById(R.id.image_delete)
         image_share = findViewById(R.id.image_share)
 
-
-
         val albumImageSliderModel: AlbumImageSliderModel? = intent.getSerializableExtra("key") as AlbumImageSliderModel?
-        allImage = albumImageSliderModel!!.getAlbumPictureModelList() as ArrayList<AlbumPictureModel>
-        position = albumImageSliderModel.getPosition()
+        allImage = albumImageSliderModel!!.albumPictureModelList as ArrayList<AlbumPictureModel>
+        position = albumImageSliderModel.position
 
         dHelper = DbHelper(this, null)
 
@@ -133,19 +124,17 @@ class AlbumSliderActivity : AppCompatActivity() {
         slider()
 
     }
-
-
     private fun slider() {
         imagesPager = ImagePager()
-        viewPager.setAdapter(imagesPager)
+        viewPager.adapter = imagesPager
         viewPager.setPageTransformer(true, DrawerTransformer() as ViewPager.PageTransformer?)
-        viewPager.setCurrentItem(position)
+        viewPager.currentItem = position
         viewPager.addOnPageChangeListener(object : OnPageChangeListener {
             @SuppressLint("NewApi")
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
-                if (position < imagesPager.getCount() - 1 && position < allImage.size - 1) {
-                    image_title . text = ( allImage [position].pictureName )
+                if (position < imagesPager.count - 1 && position < allImage.size - 1) {
+                    image_title . text =  allImage [position].pictureName
 
                     if (dHelper!!.getStatuss(java.lang.String.valueOf( allImage[position].pictureId ))) {
                         image_like.setImageResource(R.drawable.ic_liked)
@@ -310,33 +299,24 @@ class AlbumSliderActivity : AppCompatActivity() {
         }
 
     }
+    private fun shareImage( i: Int) {
+        val path: String
+        val file: File
+        val share = Intent(Intent.ACTION_SEND)
+        share.type = "image/jpeg"
+        val uri: Uri
+        path = allImage[position].picturePath
+        file = File(path)
+        uri = Uri.fromFile(file)
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_STREAM, uri)
+        startActivity(Intent.createChooser(intent, "share via"))
 
-
-
-
-        private fun shareImage( i: Int) {
-            val path: String
-            val file: File
-            val share = Intent(Intent.ACTION_SEND)
-            share.type = "image/jpeg"
-            val uri: Uri
-            path = allImage[position].picturePath
-            file = File(path)
-            uri = Uri.fromFile(file)
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-            intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_STREAM, uri)
-            startActivity(Intent.createChooser(intent, "share via"))
-
-
-
-        }
-
-
-
+    }
 
     private fun showImageInfo(albumPictureModel : AlbumPictureModel) {
 
@@ -354,8 +334,8 @@ class AlbumSliderActivity : AppCompatActivity() {
         val tvDateTaken = view.findViewById<TextView>(R.id.tv_date_taken)
         val tvDateModified = view.findViewById<TextView>(R.id.tv_date_modified)
 
-        tvImageSize.setText(humanReadableByteCountSI(
-            albumPictureModel.pictureSize.toLong()))
+        tvImageSize.text = humanReadableByteCountSI(
+            albumPictureModel.pictureSize.toLong())
         tvImagePath.text = albumPictureModel.picturePath
         tvImageName.text = albumPictureModel.pictureName
         tvImageResolution.text = albumPictureModel.imageHeightWidth
@@ -375,7 +355,6 @@ class AlbumSliderActivity : AppCompatActivity() {
         alertDialog.show()
 
     }
-
 
     class ImagePager : PagerAdapter() {
         override fun getCount(): Int {
@@ -409,9 +388,6 @@ class AlbumSliderActivity : AppCompatActivity() {
             return POSITION_NONE
         }
     }
-
-
-
 }
 
 

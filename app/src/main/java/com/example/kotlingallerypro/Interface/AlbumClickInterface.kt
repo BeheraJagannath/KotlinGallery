@@ -10,7 +10,4 @@ import java.io.File
 interface AlbumClickInterface {
     fun OnVideoClick(holder: FavVideoAdapter.PictuViewHolder?,video: List<Videomodel?>? , position: Int )
 
-
-
-
 }
