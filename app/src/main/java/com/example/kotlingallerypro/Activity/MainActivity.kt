@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         lateinit var binding: ActivityMainBinding
         private val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1
-        private var dialog: Dialog? = null
+        lateinit var dialog: Dialog
         var albumFolderAdapter : AlbumFolderAdapter? = null
         private lateinit var preferenceManager: PreferenceManager
 
@@ -221,7 +221,7 @@ class MainActivity : AppCompatActivity() {
 
 //        binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
 
-        val adapter = MyAdapter(this, supportFragmentManager, binding.tabLayout!!.tabCount)
+        val adapter = MyAdapter(this, supportFragmentManager, binding.tabLayout.tabCount)
         binding.viewPager.adapter = adapter
 
         binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout))
@@ -243,11 +243,11 @@ class MainActivity : AppCompatActivity() {
         binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 if(position == 0) {
-                    binding.mainText.setText("Gallery")
+                    binding.mainText.text = "Gallery"
                 }else if (position == 1){
-                   binding.mainText.setText("Videos")
+                   binding.mainText.text = "Videos"
                 } else if (position == 2){
-                    binding.mainText.setText("Favourite")
+                    binding.mainText.text = "Favourite"
                 }
             }
 
@@ -417,10 +417,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadExitDialog() {
         dialog = Dialog(this)
-        dialog!!.setCancelable(false)
+        dialog.setCancelable(false)
         val view: View = layoutInflater.inflate(R.layout.exit_dialog, null)
         view.findViewById<View>(R.id.btn_no).setOnClickListener {
-            dialog!!.dismiss()
+            dialog.dismiss()
         }
         view.findViewById<View>(R.id.btn_yes).setOnClickListener {
             if (minterstitialAd != null) {
@@ -430,7 +430,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         showad(view)
-        dialog!!.setContentView(view)
+        dialog.setContentView(view)
     }
     private fun showad(view: View) {
         val adLoader = AdLoader.Builder(this, getString(R.string.native_ads))
@@ -448,7 +448,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        dialog!!.show()
+        dialog.show()
 
     }
 

@@ -11,10 +11,6 @@ import com.example.kotlingallerypro.R
 import com.example.kotlingallerypro.Utils.Utils
 import com.example.kotlingallerypro.modelclass.AllImagesModel
 
-
-//class AllImageAdapter {
-//
-//}
 class AllImageAdapter(private var context: Context, private var allImages: List<AllImagesModel>?,
                       var dateList: ArrayList<String> = ArrayList<String>()) :
 
@@ -37,7 +33,7 @@ class AllImageAdapter(private var context: Context, private var allImages: List<
     override fun onBindViewHolder(holder: ImageItemViewHolder, position: Int) {
         val imageItem: AllImagesModel = allImages!![position]
         val imageItemViewHolder = holder
-        holder.textViewDate.setText(imageItem.getDate())
+        holder.textViewDate.text = imageItem.date
         if (dateList[position] == "") {
             holder.textViewDate.visibility = View.GONE
         } else {

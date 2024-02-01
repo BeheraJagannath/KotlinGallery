@@ -67,9 +67,9 @@ class AllimageActivity : AppCompatActivity() {
             }
         }
         allImagesAdapter = AllImageAdapter(this, allImagesList, dateList1)
-        allimageBinding.recyclerView.setLayoutManager(LinearLayoutManager(this, RecyclerView.VERTICAL, false))
+        allimageBinding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         allimageBinding.recyclerView.setHasFixedSize(true)
-        allimageBinding.recyclerView.setAdapter(allImagesAdapter)
+        allimageBinding.recyclerView.adapter = allImagesAdapter
     }
 
     private fun getAllImages(): List<AllImagesModel?> {
@@ -104,23 +104,23 @@ class AllimageActivity : AppCompatActivity() {
                 val longDate = date.toLong()
                 val dates = Date(longDate * 1000L)
                 val dateFormatted = SimpleDateFormat("dd.MM.yyyy").format(dates)
-                allImagesModel.setId(id.toInt())
-                allImagesModel.setPath(path)
-                allImagesModel.setName(name)
-                allImagesModel.setDate(dateFormatted)
-                allImagesModel.setPictureSize(cursor.getString(cursor.getColumnIndexOrThrow(
-                    MediaStore.Images.ImageColumns.SIZE)))
-                allImagesModel.setImageHeightWidth(cursor.getString(cursor.getColumnIndexOrThrow(
+                allImagesModel.id = id.toInt()
+                allImagesModel.path = path
+                allImagesModel.name = name
+                allImagesModel.date = dateFormatted
+                allImagesModel.pictureSize = cursor.getString(cursor.getColumnIndexOrThrow(
+                    MediaStore.Images.ImageColumns.SIZE))
+                allImagesModel.imageHeightWidth = (cursor.getString(cursor.getColumnIndexOrThrow(
                     MediaStore.Images.ImageColumns.HEIGHT)) + " x "
                         + cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.WIDTH)))
                 try {
-                    allImagesModel.setDateTaken(cursor.getString(cursor.getColumnIndexOrThrow(
-                        MediaStore.Images.ImageColumns.DATE_TAKEN)).toLong())
+                    allImagesModel.dateTaken = cursor.getString(cursor.getColumnIndexOrThrow(
+                        MediaStore.Images.ImageColumns.DATE_TAKEN)).toLong()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-                allImagesModel.setDateModified(cursor.getString(cursor.getColumnIndexOrThrow(
-                    MediaStore.Images.ImageColumns.DATE_MODIFIED)).toLong())
+                allImagesModel.dateModified = cursor.getString(cursor.getColumnIndexOrThrow(
+                    MediaStore.Images.ImageColumns.DATE_MODIFIED)).toLong()
                 dateList.add (dateFormatted)
                 allImages.add(allImagesModel)
             } while (cursor!!.moveToNext())

@@ -58,17 +58,12 @@ class FavVideoFragment : Fragment() ,AlbumClickInterface {
             IntentFilter("TAG_REFRESH")
         )
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setRecyclerView()
 
-
     }
-
-
-
     @SuppressLint("NewApi")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         // Inflate the layout for this fragment
@@ -105,14 +100,14 @@ class FavVideoFragment : Fragment() ,AlbumClickInterface {
         }
 
         if (albumVideoList != null && albumVideoList.size > 0) {
-            available.setVisibility(View.GONE)
-            recyclerView.setVisibility(View.VISIBLE)
-            recyclerView.setLayoutManager(GridLayoutManager(context, Utils.COLUMN_TYPE))
+            available.visibility =View.GONE
+            recyclerView.visibility =View.VISIBLE
+            recyclerView.layoutManager = GridLayoutManager(context, Utils.COLUMN_TYPE)
             favVideoAdapter = FavVideoAdapter(requireContext() , albumVideoList , this)
-            recyclerView.setAdapter(favVideoAdapter)
+            recyclerView.adapter = favVideoAdapter
         } else {
-            available.setVisibility(View.VISIBLE)
-            recyclerView.setVisibility(View.GONE)
+            available.visibility =View.VISIBLE
+            recyclerView.visibility = View.GONE
         }
     }
     @SuppressLint("UseRequireInsteadOfGet")

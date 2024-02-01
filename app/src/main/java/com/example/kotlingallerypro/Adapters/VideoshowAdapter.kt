@@ -153,10 +153,4 @@ import java.io.File
         resetCurrentIndex()
         notifyItemRemoved(position)
     }
-
-
-
-
-
-
 }

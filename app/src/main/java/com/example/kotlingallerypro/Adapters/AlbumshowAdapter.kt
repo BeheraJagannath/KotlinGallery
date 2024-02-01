@@ -18,9 +18,6 @@ import com.example.kotlingallerypro.Interface.SelectedVideoItem
 import com.example.kotlingallerypro.R
 import com.example.kotlingallerypro.modelclass.AlbumPictureModel
 
-//class AlbumshowAdapter {
-//}
-
 class AlbumshowAdapter(private var pictureList: ArrayList<AlbumPictureModel>, private var context: Context, private var selectedVideoItem: SelectedVideoItem) :
 
     RecyclerView.Adapter<AlbumshowAdapter.PictViewHolder>(){

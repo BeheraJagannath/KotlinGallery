@@ -16,8 +16,6 @@ import com.google.android.gms.ads.AdRequest
 class Favourite_fragment : Fragment() {
     private  lateinit var favbinding: FragmentFavouriteFragmentBinding
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
@@ -34,7 +32,6 @@ class Favourite_fragment : Fragment() {
 
         favbinding.favViewpager.setAdapter(pagerAdapter)
         favbinding.tabLayout.setupWithViewPager(favbinding.favViewpager)
-
 
 
         return favbinding.root

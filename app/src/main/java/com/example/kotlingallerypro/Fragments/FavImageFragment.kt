@@ -39,7 +39,6 @@ class FavImageFragment : Fragment() {
         private lateinit var myReceiver: MyReceiver
         lateinit var    null_image : LinearLayout
 
-
     }
     private class MyReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -66,8 +65,6 @@ class FavImageFragment : Fragment() {
 
     }
 
-
-
     @SuppressLint("NewApi")
     override fun onCreateView (inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View ? {
         // Inflate the layout for this fragment
@@ -77,8 +74,6 @@ class FavImageFragment : Fragment() {
         null_image = view.findViewById(R.id.null_image)
 
         dbHelper = DbHelper(context ,null )
-
-
 
 
         return view
@@ -112,14 +107,14 @@ class FavImageFragment : Fragment() {
         }
 
         if (favimagelist != null && favimagelist.size > 0) {
-            null_image.setVisibility(View.GONE)
-            precyclerView.setVisibility(View.VISIBLE)
-            precyclerView.setLayoutManager(GridLayoutManager(context, Utils.COLUMN_TYPE))
+            null_image.visibility = View.GONE
+            precyclerView.visibility = View.VISIBLE
+            precyclerView.layoutManager = GridLayoutManager(context, Utils.COLUMN_TYPE)
             favPhotosAdapter = FavPhotosAdapter(favimagelist,requireContext())
-            precyclerView.setAdapter(favPhotosAdapter)
+            precyclerView.adapter = favPhotosAdapter
         } else {
-            null_image.setVisibility(View.VISIBLE)
-            precyclerView.setVisibility(View.GONE)
+            null_image.visibility = View.VISIBLE
+            precyclerView.visibility = View.GONE
         }
 
     }

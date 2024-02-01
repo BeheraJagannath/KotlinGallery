@@ -49,17 +49,11 @@ class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
 //         lateinit var actionModeCallback: ActionModeCallback
          lateinit var dialog  : Dialog
 
-
-
               private val deletePosition: MutableList<Int?> = java.util.ArrayList()
 
               private fun getDeletePosition(): List<Int?> {
                return deletePosition
         }
-
-
-
-
 
     }
 
@@ -69,15 +63,12 @@ class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
 
 //        actionModeCallback = ActionModeCallback(this,contentResolver)
 
-
-
-
         folderPath = intent.getStringExtra("folderPath")
         folderName = intent.getStringExtra("folderName")
 
 
 
-        imageshowbinding.xTitle.setText(folderName)
+        imageshowbinding.xTitle.text = folderName
         imageshowbinding.ivBk.setOnClickListener {
             finish()
         }
@@ -102,7 +93,7 @@ class AlbumshowActivity : AppCompatActivity(),SelectedVideoItem {
         super.onResume()
         allPictures = java.util.ArrayList()
         allPictures = getAllImageByFolder(folderPath.toString())
-        imageshowbinding.imageshowRecycler.setLayoutManager(GridLayoutManager(this, Utils.COLUMN_TYPE))
+        imageshowbinding.imageshowRecycler.layoutManager = GridLayoutManager(this, Utils.COLUMN_TYPE)
         adapter = AlbumshowAdapter(allPictures!!, this,this)
 
         imageshowbinding.imageshowRecycler.setAdapter(adapter)

@@ -96,12 +96,7 @@ class AlbumSliderActivity : AppCompatActivity() {
             return format.format(date)
         }
 
-
-
-
-
     }
-
 
     lateinit var viewPager: ViewPager
     @SuppressLint("NewApi")
@@ -121,8 +116,8 @@ class AlbumSliderActivity : AppCompatActivity() {
 
 
         val albumImageSliderModel: AlbumImageSliderModel? = intent.getSerializableExtra("key") as AlbumImageSliderModel?
-        allImage = albumImageSliderModel!!.getAlbumPictureModelList() as ArrayList<AlbumPictureModel>
-        position = albumImageSliderModel.getPosition()
+        allImage = albumImageSliderModel!!.albumPictureModelList as ArrayList<AlbumPictureModel>
+        position = albumImageSliderModel.position
 
         dHelper = DbHelper(this, null)
 
@@ -137,15 +132,15 @@ class AlbumSliderActivity : AppCompatActivity() {
 
     private fun slider() {
         imagesPager = ImagePager()
-        viewPager.setAdapter(imagesPager)
+        viewPager.adapter = imagesPager
         viewPager.setPageTransformer(true, DrawerTransformer() as ViewPager.PageTransformer?)
-        viewPager.setCurrentItem(position)
+        viewPager.currentItem = position
         viewPager.addOnPageChangeListener(object : OnPageChangeListener {
             @SuppressLint("NewApi")
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
-                if (position < imagesPager.getCount() - 1 && position < allImage.size - 1) {
-                    image_title . text = ( allImage [position].pictureName )
+                if (position < imagesPager.count - 1 && position < allImage.size - 1) {
+                    image_title . text =  allImage [position].pictureName
 
                     if (dHelper!!.getStatuss(java.lang.String.valueOf( allImage[position].pictureId ))) {
                         image_like.setImageResource(R.drawable.ic_liked)
@@ -354,8 +349,8 @@ class AlbumSliderActivity : AppCompatActivity() {
         val tvDateTaken = view.findViewById<TextView>(R.id.tv_date_taken)
         val tvDateModified = view.findViewById<TextView>(R.id.tv_date_modified)
 
-        tvImageSize.setText(humanReadableByteCountSI(
-            albumPictureModel.pictureSize.toLong()))
+        tvImageSize.text = humanReadableByteCountSI(
+            albumPictureModel.pictureSize.toLong())
         tvImagePath.text = albumPictureModel.picturePath
         tvImageName.text = albumPictureModel.pictureName
         tvImageResolution.text = albumPictureModel.imageHeightWidth

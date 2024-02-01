@@ -94,10 +94,10 @@ class VideoshowActivity : AppCompatActivity() ,VideoClicklistener {
             videobinding.videoshowRecycler.setHasFixedSize(true)
             videobinding.videoshowRecycler.setItemViewCacheSize(20)
             videobinding.videoshowRecycler.setDrawingCacheEnabled(true)
-            videobinding.videoshowRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH)
+            videobinding.videoshowRecycler.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH
             videobinding.videoshowRecycler.setNestedScrollingEnabled(false)
-            videobinding.videoshowRecycler.setAdapter(videoshowAdapter)
-            videobinding.videoshowRecycler.setLayoutManager(GridLayoutManager(this, Utils.COLUMN_TYPE))
+            videobinding.videoshowRecycler.adapter = (videoshowAdapter)
+            videobinding.videoshowRecycler.layoutManager = (GridLayoutManager(this, Utils.COLUMN_TYPE))
         } else {
             Toast.makeText(this, "can't find any videos", Toast.LENGTH_SHORT).show()
         }

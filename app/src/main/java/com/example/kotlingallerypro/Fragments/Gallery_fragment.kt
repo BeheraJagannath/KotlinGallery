@@ -38,9 +38,7 @@ class Gallery_fragment : Fragment() {
         var fragmentActivity: FragmentActivity? = null
         private lateinit var myReceiver: MyReceiver
         lateinit var your_parent_layout: LinearLayout
-
     }
-
     class MyReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
 
@@ -54,8 +52,6 @@ class Gallery_fragment : Fragment() {
             myReceiver ,
             IntentFilter("TAG_REFRESH")
         )
-
-
     }
 
     @SuppressLint("NewApi")
@@ -63,8 +59,6 @@ class Gallery_fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showAlbumFolder()
     }
-
-
     private var pictureFolderPath: String? = null
     private var folderName: String? = null
 
@@ -79,7 +73,6 @@ class Gallery_fragment : Fragment() {
        your_parent_layout = view.findViewById(R.id.your_parent_layout)
 
 //       mAdView = view. findViewById(R.id.adView)
-
 
 //       val adRequest =  AdRequest.Builder().build()
 //       ggAdView.loadAd(adRequest)
@@ -111,39 +104,26 @@ class Gallery_fragment : Fragment() {
            }
        })
 
-
-
-
-
        return view
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
         showAlbumFolder()
-
     }
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun showAlbumFolder() {
-        recycler . setLayoutManager ( GridLayoutManager (context, Utils.COLUMN_TYPE))
+        recycler . layoutManager =  GridLayoutManager (context, Utils.COLUMN_TYPE)
         recycler . setHasFixedSize(true)
         Log.d("========", "onCreateView: " + getPicturePaths())
         val albumAdapter = getPicturePaths()?.let { context?.let { it1 ->
             AlbumFolderAdapter(it,
                 it1)
         } }
-        recycler.setAdapter ( albumAdapter )
-
+        recycler.adapter =  albumAdapter
 
     }
-
-
     @SuppressLint("UseRequireInsteadOfGet")
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun getPicturePaths(): ArrayList<AlbumDetail>? {
@@ -200,9 +180,6 @@ class Gallery_fragment : Fragment() {
         }
         return picFolder
     }
-
-
-
 }
 
 
